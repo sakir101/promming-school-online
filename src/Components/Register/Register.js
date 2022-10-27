@@ -1,11 +1,15 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { AuthContext } from '../../Contexts/AuthProvider';
+import {Link} from "react-router-dom"
+import { GithubAuthProvider, GoogleAuthProvider } from 'firebase/auth';
 
 const Register = () => {
-    const {createUser, updateUserProfile} = useContext(AuthContext);
-    
+    const {createUser, updateUserProfile, signInGoogleHandler, signInGithubHandler} = useContext(AuthContext);
+    const [error, setError] = useState('');
+    const googleProvider = new GoogleAuthProvider();
+    const githubProvider = new GithubAuthProvider();
     const handleSubmit = event => {
         event.preventDefault();
         const form = event.target;
@@ -22,7 +26,7 @@ const Register = () => {
             form.reset();
 
         })
-        .catch( e => console.error(e));
+        .catch( e => setError(e.message));
 
     }
 
@@ -35,6 +39,30 @@ const Register = () => {
         updateUserProfile(profile)
             .then(() => { })
             .catch(error => console.error(error));
+    }
+
+    const googleSignIn = () =>{
+        signInGoogleHandler(googleProvider)
+        .then(result => {
+            const users = result.user;
+            console.log(users);
+            
+          })
+          .catch(error => {
+            console.log('error:', error)
+          })
+    }
+
+    const githubSignIn = () =>{
+        signInGithubHandler(githubProvider)
+        .then(result => {
+            const users = result.user;
+            
+            console.log(users)
+          })
+          .catch(error => {
+            console.log('error:', error)
+          })
     }
 
     return (
@@ -67,9 +95,14 @@ const Register = () => {
 
                 </Form.Text>
             </Form>
-            <button className='btn btn-outline-primary my-3'>Sign in with Google</button>
+            <p>Have an account please <Link to="/login">Login</Link></p>
+            <Form.Text className="text-danger">
+                {error}
+            </Form.Text>
             <br />
-            <button className='btn btn-outline-primary'>Sign in with github</button>
+            <button className='btn btn-outline-primary my-3' onClick={googleSignIn}>Sign in with Google</button>
+            <br />
+            <button className='btn btn-outline-primary' onClick={githubSignIn}>Sign in with github</button>
         </div>
 
     );

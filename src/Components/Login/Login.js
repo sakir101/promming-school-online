@@ -1,13 +1,23 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import { AuthContext } from '../../Contexts/AuthProvider';
+import {Link} from 'react-router-dom'
 
 const Login = () => {
-    const handleSubmit = event =>{
+    const {signIn} = useContext(AuthContext);
+    const [error, setError] = useState('');
+    const handleSubmit = event => {
         event.preventDefault();
         const form = event.target;
         const email = form.email.value;
         const password = form.password.value;
+        signIn(email, password)
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+                form.reset();
+            }).catch(error => setError(error.message))
     }
     return (
         <div className='my-5'>
@@ -27,10 +37,12 @@ const Login = () => {
                 <Button variant="primary" type="submit">
                     Login
                 </Button>
+                <br />
                 <Form.Text className="text-danger">
-
+                    {error}
                 </Form.Text>
             </Form>
+            <p>Don't have an account please <Link to="/register">Signup</Link></p>
         </div>
     );
 };
