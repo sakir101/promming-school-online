@@ -1,28 +1,29 @@
-import React, { useState } from 'react';
-import Button from 'react-bootstrap/Button';
-import Container from 'react-bootstrap/Container';
-import Form from 'react-bootstrap/Form';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
+import React, { useContext, useState } from 'react';
+import { Image, Navbar, Nav, Button, Container } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom'
-import { SunIcon, MoonIcon } from '@heroicons/react/24/solid'
+import { SunIcon, MoonIcon, UserIcon } from '@heroicons/react/24/solid'
 import './Header.css'
-
+import { AuthContext } from '../../Contexts/AuthProvider';
+import { Link } from 'react-router-dom'
 
 const Header = () => {
-    const [p, setP] = useState(0)
-    
+    const [p, setP] = useState(0);
+    const { user, logOut } = useContext(AuthContext);
+
     const btnClick = () => {
         if (p === 0) {
             setP(1);
         }
-        else if(p===1){
+        else if (p === 1) {
             setP(0);
         }
     }
 
-
+    const handleLogOut = () => {
+        logOut()
+            .then(() => { })
+            .catch(error => console.error(error))
+    }
     return (
         <div>
             <Navbar bg="dark" expand="lg">
@@ -49,11 +50,52 @@ const Header = () => {
                             <Nav.Link><NavLink to='/blog' className={({ isActive }) =>
                                 isActive ? 'active' : 'text-warning text-decoration-none fw-bold'
                             } >Blog</NavLink></Nav.Link>
+                            <Nav.Link><NavLink to='/premium' className={({ isActive }) =>
+                                isActive ? 'active' : 'text-warning text-decoration-none fw-bold'
+                            } >Get Premium Access</NavLink></Nav.Link>
+                             <Nav.Link><NavLink to='/about' className={({ isActive }) =>
+                                isActive ? 'active' : 'text-warning text-decoration-none fw-bold'
+                            } >About</NavLink></Nav.Link>
                             <Nav.Link onClick={btnClick}>
                                 {
-                                    p===1? <MoonIcon className='icon'></MoonIcon>:
-                                    <SunIcon className='icon'></SunIcon>
+                                    p === 1 ? <MoonIcon className='icon'></MoonIcon> :
+                                        <SunIcon className='icon'></SunIcon>
                                 }
+                            </Nav.Link>
+                            <Nav.Link>
+                                <>
+                                    {
+                                        user?.uid ?
+                                            <>
+                                                <NavLink className={({ isActive }) =>
+                                                    isActive ? 'active' : 'text-warning text-decoration-none fw-bold mx-3'
+                                                } onClick={handleLogOut}>Log out</NavLink>
+                                                <span className='text-white mx-3'>{user?.displayName}</span>
+                                                
+                                            </>
+                                            :
+                                            <>
+                                                <NavLink to='/login' className={({ isActive }) =>
+                                                    isActive ? 'active' : 'text-warning text-decoration-none fw-bold mx-3'
+                                                }>Login</NavLink>
+                                                <NavLink to='/register' className={({ isActive }) =>
+                                                    isActive ? 'active' : 'text-warning text-decoration-none fw-bold mx-3'
+                                                }>Register</NavLink>
+                                            </>
+                                    }
+
+
+                                </>
+                                <Link to="/profile">
+                                    {user?.photoURL ?
+                                        <Image
+                                            style={{ height: '30px' }}
+                                            roundedCircle
+                                            src={user?.photoURL}>
+                                        </Image>
+                                        : <UserIcon className='icon'></UserIcon>
+                                    }
+                                </Link>
                             </Nav.Link>
                         </Nav>
                     </Navbar.Collapse>

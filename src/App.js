@@ -9,6 +9,9 @@ import Blog from './Components/Blog/Blog';
 import SingleCourse from './Components/SingleCourse/SingleCourse';
 import Login from './Components/Login/Login';
 import Register from './Components/Register/Register';
+import Premium from './Components/Premium/Premium';
+import PrivateRoutes from './Components/PrivateRoutes/PrivateRoutes';
+import About from './Components/About/About';
 
 function App() {
   const router = createBrowserRouter([
@@ -21,15 +24,15 @@ function App() {
           element: <Home></Home>
         },
         {
-          path: '/faq',
+          path: 'faq',
           element: <Faq></Faq>
         },
         {
-          path: '/courses',
+          path: 'courses',
           element: <Courses></Courses>
         },
         {
-          path: '/blog',
+          path: 'blog',
           element: <Blog></Blog>
         },
         {
@@ -38,17 +41,22 @@ function App() {
           loader: ({params}) => fetch(`http://localhost:5000/category/${params.id}`)
       },
       {
-        path: '/login',
+        path: 'login',
         element: <Login></Login>
       },
       {
-        path: '/register',
+        path: 'register',
         element: <Register></Register>
+      },
+      {
+        path: 'premium',
+        element: <PrivateRoutes><Premium></Premium></PrivateRoutes>
       }
       ]
       
       
     },
+    {path: '/bout', element: <About></About>},
     { path: '*', element: <div>404 Page Not Found! About is unable to reach</div> }
   ])
   return (
