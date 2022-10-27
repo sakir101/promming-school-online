@@ -2,10 +2,11 @@ import React, { useContext, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { AuthContext } from '../../Contexts/AuthProvider';
-import {Link, useNavigate, useLocation} from 'react-router-dom'
+import { Link, useNavigate, useLocation } from 'react-router-dom'
+
 
 const Login = () => {
-    const {signIn} = useContext(AuthContext);
+    const { signIn } = useContext(AuthContext);
     const [error, setError] = useState('');
     const navigate = useNavigate();
     const location = useLocation();
@@ -19,6 +20,7 @@ const Login = () => {
             .then(result => {
                 const user = result.user;
                 console.log(user);
+                alert("Login Successful");
                 form.reset();
                 navigate(from, { replace: true });
             }).catch(error => setError(error.message))
@@ -45,8 +47,10 @@ const Login = () => {
                 <Form.Text className="text-danger">
                     {error}
                 </Form.Text>
+
             </Form>
             <p>Don't have an account please <Link to="/register">Signup</Link></p>
+
         </div>
     );
 };

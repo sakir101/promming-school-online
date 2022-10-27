@@ -59,6 +59,7 @@ const Register = () => {
             const users = result.user;
             
             console.log(users)
+            alert("Registration Successful");
           })
           .catch(error => {
             console.log('error:', error)

@@ -50,9 +50,6 @@ const Header = () => {
                             <Nav.Link><NavLink to='/blog' className={({ isActive }) =>
                                 isActive ? 'active' : 'text-warning text-decoration-none fw-bold'
                             } >Blog</NavLink></Nav.Link>
-                            <Nav.Link><NavLink to='/premium' className={({ isActive }) =>
-                                isActive ? 'active' : 'text-warning text-decoration-none fw-bold'
-                            } >Get Premium Access</NavLink></Nav.Link>
                              <Nav.Link><NavLink to='/about' className={({ isActive }) =>
                                 isActive ? 'active' : 'text-warning text-decoration-none fw-bold'
                             } >About</NavLink></Nav.Link>
@@ -70,7 +67,7 @@ const Header = () => {
                                                 <NavLink className={({ isActive }) =>
                                                     isActive ? 'active' : 'text-warning text-decoration-none fw-bold mx-3'
                                                 } onClick={handleLogOut}>Log out</NavLink>
-                                                <span className='text-white mx-3'>{user?.displayName}</span>
+                                                
                                                 
                                             </>
                                             :
@@ -91,7 +88,7 @@ const Header = () => {
                                         <Image
                                             style={{ height: '30px' }}
                                             roundedCircle
-                                            src={user?.photoURL}>
+                                            src={user?.photoURL} title={user?.displayName} className='mx-3'>
                                         </Image>
                                         : <UserIcon className='icon'></UserIcon>
                                     }

@@ -11,7 +11,7 @@ const Course = ({ course, length }) => {
             <img src={photoUrl} className="card-img-top img-fix" alt="..."/>
             <div className="card-body">
               <h5 className="card-title">{name}</h5>
-              <Link to={`/category/${id}`}><button className='btn btn-outline-primary my-3'>View Details</button></Link>
+              <Link to={`/category/${id}`}><button className='btn btn-outline-primary my-3'>Get Premium Access</button></Link>
             </div>
           </div>
         </div>

@@ -17,9 +17,13 @@ const SingleCourse = () => {
     }
     return (
         <div id='para'>
+            <div className='d-flex mx-5'>
             <h1 className='text-primary text-decoration-underline'>{name}</h1>
-            <p><button onClick={onButtonClick}>Download</button></p>
-            <img src={photoUrl} alt="" className='my-4 img' />
+            <button onClick={onButtonClick} className="mx-5">Download</button>
+            </div>
+            
+            
+            <img src={photoUrl} alt="" className='my-4 img-fluid' />
             <p>{desc}</p>
         </div>
     );

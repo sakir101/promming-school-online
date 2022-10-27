@@ -9,7 +9,6 @@ import Blog from './Components/Blog/Blog';
 import SingleCourse from './Components/SingleCourse/SingleCourse';
 import Login from './Components/Login/Login';
 import Register from './Components/Register/Register';
-import Premium from './Components/Premium/Premium';
 import PrivateRoutes from './Components/PrivateRoutes/PrivateRoutes';
 import About from './Components/About/About';
 
@@ -37,7 +36,7 @@ function App() {
         },
         {
           path: '/category/:id',
-          element: <SingleCourse></SingleCourse>,
+          element: <PrivateRoutes><SingleCourse></SingleCourse></PrivateRoutes>,
           loader: ({params}) => fetch(`http://localhost:5000/category/${params.id}`)
       },
       {
@@ -47,11 +46,8 @@ function App() {
       {
         path: 'register',
         element: <Register></Register>
-      },
-      {
-        path: 'premium',
-        element: <PrivateRoutes><Premium></Premium></PrivateRoutes>
       }
+     
       ]
       
       
