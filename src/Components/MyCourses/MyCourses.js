@@ -4,7 +4,7 @@ let length = 0;
 const MyCourses = () => {
     const [courses, setCourses] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:5000/category')
+        fetch('https://p-skool-server.vercel.app/category')
             .then(res => res.json())
             .then(data => setCourses(data));
     }, [])

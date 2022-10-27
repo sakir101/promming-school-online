@@ -37,7 +37,7 @@ function App() {
         {
           path: '/category/:id',
           element: <PrivateRoutes><SingleCourse></SingleCourse></PrivateRoutes>,
-          loader: ({params}) => fetch(`http://localhost:5000/category/${params.id}`)
+          loader: ({params}) => fetch(`https://p-skool-server.vercel.app/category/${params.id}`)
       },
       {
         path: 'login',
