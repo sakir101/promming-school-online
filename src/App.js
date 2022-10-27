@@ -7,6 +7,8 @@ import Courses from './Components/Courses/Courses';
 import Main from './Components/Main/Main';
 import Blog from './Components/Blog/Blog';
 import SingleCourse from './Components/SingleCourse/SingleCourse';
+import Login from './Components/Login/Login';
+import Register from './Components/Register/Register';
 
 function App() {
   const router = createBrowserRouter([
@@ -35,6 +37,14 @@ function App() {
           element: <SingleCourse></SingleCourse>,
           loader: ({params}) => fetch(`http://localhost:5000/category/${params.id}`)
       },
+      {
+        path: '/login',
+        element: <Login></Login>
+      },
+      {
+        path: '/register',
+        element: <Register></Register>
+      }
       ]
       
       
