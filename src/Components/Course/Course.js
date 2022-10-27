@@ -8,7 +8,7 @@ const Course = ({ course, length }) => {
         
         <div className="col-lg-4 col-md-6 col-sm-12">
           <div className="card">
-            <img src={photoUrl} className="card-img-top img-fluid img-fix" alt="..."/>
+            <img src={photoUrl} className="card-img-top img-fix" alt="..."/>
             <div className="card-body">
               <h5 className="card-title">{name}</h5>
               <Link to={`/category/${id}`}><button className='btn btn-outline-primary my-3'>View Details</button></Link>
