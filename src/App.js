@@ -6,6 +6,7 @@ import Faq from './Components/Faq/Faq';
 import Courses from './Components/Courses/Courses';
 import Main from './Components/Main/Main';
 import Blog from './Components/Blog/Blog';
+import SingleCourse from './Components/SingleCourse/SingleCourse';
 
 function App() {
   const router = createBrowserRouter([
@@ -28,7 +29,12 @@ function App() {
         {
           path: '/blog',
           element: <Blog></Blog>
-        }
+        },
+        {
+          path: '/category/:id',
+          element: <SingleCourse></SingleCourse>,
+          loader: ({params}) => fetch(`http://localhost:5000/category/${params.id}`)
+      },
       ]
       
       
