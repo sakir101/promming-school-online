@@ -9,11 +9,11 @@ const Sidebar = () => {
     }, [])
     console.log(categories);
     return (
-        <div>
-            <h3>Total Courses: {categories.length}</h3>
+        <div className='my-4'>
+            <h2 className='text-decoration-underline my-4'>Total Courses: {categories.length}</h2>
             {
                 categories.map(category => <p key={category.id}>
-                    <Link to={`/category/${category.id}`}>{category.name}</Link>
+                    <Link to={`/category/${category.id}`} className="text-decoration-none">{category.name}</Link>
                 </p>)
             }
         </div>

@@ -6,11 +6,11 @@ import Sidebar from '../Sidebar/Sidebar';
 const Courses = () => {
     return (
        <Container>
-            <Row>
-                <Col lg='3'>
+            <Row className="g-3">
+                <Col lg='3' sm='12'>
                     <Sidebar></Sidebar>
                 </Col>
-                <Col lg='9'>
+                <Col lg='9' sm='12'>
                     <MyCourses></MyCourses>
                 </Col>
             </Row>
